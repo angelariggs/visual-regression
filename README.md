@@ -39,13 +39,19 @@ This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands a
 * Copy the [visual regression README](https://github.com/metaltoad/visual-regression/blob/master/README.md) into `<project root>/tests/backstop`
 
 #BackstopJS Commands and Use
-This section is for using BackstopJS after it's already been set up on a project. If you need information about setting up a project on BackstopJS, please see the [BackstopJS Setup for Local Machines](#backstopjs-setup-for-local-machines) section above.
+This section is for using BackstopJS after it's already been set up on a project. If you need information about setting up a project with BackstopJS, please see the [BackstopJS Setup for Local Machines](#backstopjs-setup-for-local-machines) section above.
+
+If BackstopJS is already set up on a project, but you haven't used it yet, you'll need to run through the following steps first:
+* `npm install -g backstopjs`
+* `npm install minimist`
+
+The `backstop_data` folder is in the .gitignore, so it won't be included in the repo. But it will be created automatically when you run references and tests, and is determined by the `paths` value in the `backstop.js` configuration.
 
 The basic commands look like this:
-  * References: `backstop reference --configPath=backstop.js --pathFile=paths --env=<environment> --refHost=<environment URL>`
-  * Tests: `backstop test --configPath=backstop.js --pathFile=paths --env=<environment> --testHost=<environment URL>`
-  * Reports: `backstop openReport --configPath=backstop.js --env=<environment>`
-    * After the test completes, BackstopJS should automatically open the visual regression report in a new browswer window. You would run the `openReport` command in order to manually open the report.
+* References: `backstop reference --configPath=backstop.js --pathFile=paths --env=<environment> --refHost=<environment URL>`
+* Tests: `backstop test --configPath=backstop.js --pathFile=paths --env=<environment> --testHost=<environment URL>`
+* Reports: `backstop openReport --configPath=backstop.js --env=<environment>`
+  * After the test completes, BackstopJS should automatically open the visual regression report in a new browswer window. You would run the `openReport` command in order to manually open the report.
 
 Let's break that down:
 * configPath: The BackstopJS configuration file
