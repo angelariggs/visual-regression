@@ -93,7 +93,7 @@ When comparing different environments, exclude the `--env` argument from your co
 
 Commands:
 * Reference (staging): `backstop reference --configPath=backstop.js --pathFile=paths --refHost=http://staging-site.com`
-* Test (prod): `backstop test --configPath=backstop.js --pathFile=paths --refHost=http://prod-site.com`
+* Test (prod): `backstop test --configPath=backstop.js --pathFile=paths --testHost=http://prod-site.com`
 
 #Additional Notes
 While running the BackstopJS test, you may receive an error in Terminal similar to:
