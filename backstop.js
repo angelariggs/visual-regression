@@ -3,37 +3,60 @@
   backstop reference --configPath=backstop.js --pathFile=paths --env=local --refHost=http://site.dev
   backstop test --configPath=backstop.js --pathFile=paths --env=local --testHost=http://site.dev
 
+  Remember that the `--env` parameter needs to be the same for reference and test commands, even if you're comparing two different environments.
+
 */
 
-var arguments = require('minimist')(process.argv.slice(2)); // grabs the process arguments
+var args = require('minimist')(process.argv.slice(2)); // grabs the process args
+// var dotenv = require('dotenv').config(); // if sites have basic auth
 var defaultPaths = ['/']; // default path just checks the homepage
 var scenarios = []; // The array that'll have the URL paths to check
 
-/*
-  Work out the environments that are being compared
- */
- // Site for reference screenshots
-if (!arguments.refHost) {
-  arguments.refHost = "http://local.dev"; // Default ref environment
+var environments = {
+  'dev': 'dev URL',
+  'staging': 'staging URL',
+  'prod': 'prod URL'
+};
+var default_environment = 'prod';
+
+// Set the environments that are being compared
+if (!args.env) {
+  args.env = default_environment;
+}
+else if (!environments.hasOwnProperty(args.env)) {
+  // @todo notify of unknown environment?
+  args.env = default_environment;
+}
+
+// Site for reference screenshots
+if (!args.refHost) {
+  args.refHost = environments[args.env];
 }
 
 // Site for test screenshots
-if (!arguments.testHost) {
-  arguments.testHost = "http://local.dev"; // Default test environment
+if (!args.testHost) {
+  args.testHost = environments[args.env];
 }
 
-/*
-  Work out which paths to use: an array from a file, a supplied array, or the defaults
- */
- // We'll be using the array from paths.js
-if (arguments.pathFile) {
-  var pathConfig = require('./'+arguments.pathFile+'.js');
+// Setting the directories to save screenshots
+var saveDirectories = {
+  "bitmaps_reference": "./backstop_data/"+args.env+"_reference",
+  "bitmaps_test": "./backstop_data/"+args.env+"_test",
+  "html_report": "./backstop_data/"+args.env+"_html_report",
+  "ci_report": "./backstop_data/"+args.env+"_ci_report"
+};
+
+
+// Work out which paths to use: an array from a file, a supplied array, or the default
+  // We'll be using the array from the `paths.js` file
+if (args.pathFile) {
+  var pathConfig = require('./'+args.pathFile+'.js'); // use paths.js file
   var paths = pathConfig.array;
-} else if (arguments.paths) {
-  pathString = arguments.paths;
+} else if (args.paths) {
+  pathString = args.paths; // pass in a comma-separated list of paths in terminal
   var paths = pathString.split(',');
 } else {
-  var paths = defaultPaths; // keep with the default of just the homepage
+  var paths = defaultPaths; // use the default of just the homepage
 }
 
 // Scenarios are a default part of config for BackstopJS
@@ -42,8 +65,8 @@ for (var k = 0; k < paths.length; k++) {
   scenarios.push (
     {
       "label": paths[k],
-      "referenceUrl": arguments.refHost+paths[k],
-      "url": arguments.testHost+paths[k],
+      "referenceUrl": args.refHost+paths[k],
+      "url": args.testHost+paths[k],
       "hideSelectors": [],
       "removeSelectors": [],
       "selectors": ["document"], // "document" will snapshot the entire page
@@ -53,30 +76,10 @@ for (var k = 0; k < paths.length; k++) {
   );
 }
 
-/*
-  Work out the directories to save screenshots
- */
-if (!arguments.env) {
-  arguments.env = "screenshots"; // used for comparing two different environments
-  var saveDirectories = {
-    "bitmaps_reference": "./backstop_data/screenshots_reference",
-    "bitmaps_test": "./backstop_data/screenshots_test",
-    "html_report": "./backstop_data/screenshots_html_report",
-    "ci_report": "./backstop_data/screenshots_ci_report"
-  };
- } else if (arguments.env) {
-  var saveDirectories = {
-    "bitmaps_reference": "./backstop_data/"+arguments.env+"_reference",
-    "bitmaps_test": "./backstop_data/"+arguments.env+"_test",
-    "html_report": "./backstop_data/"+arguments.env+"_html_report",
-    "ci_report": "./backstop_data/"+arguments.env+"_ci_report"
-  };
-}
-
 // BackstopJS configuration
 module.exports =
 {
-  "id": "project_"+arguments.env+"_config",
+  "id": "project_"+args.env+"_config",
   "viewports": [
     {
       "name": "desktop",
