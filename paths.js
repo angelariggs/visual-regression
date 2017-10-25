@@ -1,7 +1,7 @@
 var pathConfig = {};
 
 pathConfig.array = [
-  '/', // homepage
+  '/' // homepage
   // include other relative URL paths in this array
 ]
 
