@@ -31,7 +31,8 @@ This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands a
 * Run: `backstop genConfig` if you're on v2, or `backstop init` if you're on v3.
     * This will create a `backstop_data` folder and a `backstop.json` file.
     * Rename `backstop.json` to `backstop.js`
-* Run: `npm install minimist` (Note: local install, not global)
+* Run `npm init` to create the `package.json` file
+* Run `npm install minimist` and `npm install dotenv` (Note: local install, not global)
     * This will create a `package-lock.json` file; make sure you commit this to the repo.
 * Add `/tests/backstop/backstop_data` and `/tests/backstop/node_modules` to the `.gitignore` in the project root
 * Copy the contents of [the config file](https://github.com/metaltoad/visual-regression/blob/master/backstop.js) from the Visual Regression repo into the `backstop.js` file you just renamed.
@@ -50,7 +51,7 @@ This section is for using BackstopJS after it's already been set up on a project
 
 If BackstopJS is already set up on a project, but you haven't used it yet, you'll need to run through the following steps first:
 * `npm install -g backstopjs`
-* Navigate to the `/tests/backstop` folder and run `npm install`, which will install the `minimist` package.
+* Navigate to the `/tests/backstop` folder and run `npm install`.
 
 NOTE: The project's `.gitignore` file includes `/tests/backstop/backstop_data`, so you won't see this when you visit the project for the first time. The `backstop_data` folder is created automatically when you run references and tests, and its location in the `backstop` directory is determined by the `saveDirectories` variable in the `backstop.js` configuration.
 
