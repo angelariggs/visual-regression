@@ -25,23 +25,23 @@ By default, BackstopJS uses JSON config files. This setup means that you need a 
 This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands and Use](#backstopjs-commands-and-use) below for information on running visual regression tests when BackstopJS is already set up on a project.
 
 * Make sure you have `npm` and `node` installed
+* Install BackstopJS globally with `npm install -g backstopjs`
+    * **NOTE:** With BackstopJS v3, Chrome is the best engine to use for screenshots. However, as of this note (March 8, 2018) you'll need to make sure you're on at least Chrome v64. Otherwise you'll hit some snags with port weirdness.
 * Create a feature branch for this setup, so you can merge in the changes once you're done
 * Create a `/tests/backstop` directory in the project root
-* Run: `npm install -g backstopjs`
-* Run: `backstop genConfig` if you're on v2, or `backstop init` if you're on v3.
-    * This will create a `backstop_data` folder and a `backstop.json` file.
-    * Rename `backstop.json` to `backstop.js`
-* Run `npm init` to create the `package.json` file
-* Run `npm install minimist` and `npm install dotenv` (Note: local install, not global)
-    * This will create a `package-lock.json` file; make sure you commit this to the repo.
+* Copy over the contents inside this `visual-regression` directory to the project's `tests/backstop` directory. That should include:
+    * generic `.env` file
+    * generic `backstop.js` file
+    * generic `Makefile`
+    * `package-lock.json`
+    * `package.json`
+    * generic `paths.js`
+* Run `npm install` to get local packages, including `dotenv` (used for sites with basic auth) and `minimist` (used to implement our custom JS config instead of the default JSON config)
 * Add `/tests/backstop/backstop_data` and `/tests/backstop/node_modules` to the `.gitignore` in the project root
-* Copy the contents of [the config file](https://github.com/metaltoad/visual-regression/blob/master/backstop.js) from the Visual Regression repo into the `backstop.js` file you just renamed.
-* In the `backstop.js` file, update the `dev URL`, `staging URL`, and `prod URL` values for the `environments` variable.
-    * If desired, update the `delay` and `misMatchThreshold` values in the `scenarios.push` array
-    * If desired, update or add viewport settings in the `module.exports`
-* Copy the [paths.js file](https://github.com/metaltoad/visual-regression/blob/master/paths.js) into `<project root>/tests/backstop`
-    * Add your relative URLs to the `pathConfig` array
-* Copy the [Makefile](https://github.com/metaltoad/visual-regression/blob/master/Makefile) into `<project root>/tests/backstop`
+* In the `backstop.js` file, update the generic `dev URL`, `staging URL`, and `prod URL` values.
+* *If desired*, update the `delay` and `misMatchThreshold` values in the `scenarios.push` array
+* *If desired*, update or add viewport settings in the `module.exports`
+* In the `paths.js` file, add your relative URLs to the `pathConfig` array
 * Create a README in `<project root>/tests/backstop`, and just add a link back to the [visual regression README](https://github.com/metaltoad/visual-regression/blob/master/README.md).
     * This is to make viz reg updates simpler; instead of having a visual regression README per project, there will just be a single source of truth README in the main Visual Regression repo.
 
@@ -50,8 +50,9 @@ This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands a
 This section is for using BackstopJS after it's already been set up on a project. If you need information about setting up a project with BackstopJS, please see the [BackstopJS Setup for Local Machines](#backstopjs-setup-for-local-machines) section above.
 
 If BackstopJS is already set up on a project, but you haven't used it yet, you'll need to run through the following steps first:
+
 * `npm install -g backstopjs`
-* Navigate to the `/tests/backstop` folder and run `npm install`.
+* Navigate to the `/tests/backstop` folder and run `npm install`
 
 NOTE: The project's `.gitignore` file includes `/tests/backstop/backstop_data`, so you won't see this when you visit the project for the first time. The `backstop_data` folder is created automatically when you run references and tests, and its location in the `backstop` directory is determined by the `saveDirectories` variable in the `backstop.js` configuration.
 
