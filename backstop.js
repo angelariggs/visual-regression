@@ -97,7 +97,10 @@ module.exports =
   "paths":
     saveDirectories,
   "casperFlags": ["--ignore-ssl-errors=true", "--ssl-protocol=any"],
-  "engine": "phantomjs", // alternate can be slimerjs
+  "engine": "chromy", // alternate can be slimerjs
+    "engineOptions": {
+      chromeFlags: ["--allow-insecure-localhost"]
+    },
   "report": ["browser"],
   "debug": false
 };
