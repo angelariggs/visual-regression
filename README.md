@@ -25,8 +25,6 @@ By default, BackstopJS uses JSON config files. This setup means that you need a 
 This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands and Use](#backstopjs-commands-and-use) below for information on running visual regression tests when BackstopJS is already set up on a project.
 
 * Make sure you have `npm` and `node` installed
-* Install BackstopJS globally with `npm install -g backstopjs`
-    * **NOTE:** With BackstopJS v3, Chrome is the best engine to use for screenshots. However, as of this note (March 8, 2018) you'll need to make sure you're on at least Chrome v64. Otherwise you'll hit some snags with port weirdness.
 * Create a feature branch for this setup, so you can merge in the changes once you're done
 * Create a `/tests/backstop` directory in the project root
 * Copy over the contents inside this `visual-regression` directory to the project's `tests/backstop` directory. That should include:
@@ -36,7 +34,8 @@ This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands a
     * `package-lock.json`
     * `package.json`
     * generic `paths.js`
-* Run `npm install` to get local packages, including `dotenv` (used for sites with basic auth) and `minimist` (used to implement our custom JS config instead of the default JSON config)
+* Run `npm install` to get local packages, including `backstopJS`, `dotenv` (used for sites with basic auth) and `minimist` (used to implement our custom JS config instead of the default JSON config)
+    * **NOTE:** With the current version of BackstopJS (as of June 2018), Puppeteer is the recommended engine to use for screenshots.
 * Add `/tests/backstop/backstop_data` and `/tests/backstop/node_modules` to the `.gitignore` in the project root
 * In the `backstop.js` file, update the generic `dev URL`, `staging URL`, and `prod URL` values.
 * *If desired*, update the `delay` and `misMatchThreshold` values in the `scenarios.push` array

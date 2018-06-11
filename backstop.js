@@ -96,11 +96,14 @@ module.exports =
     scenarios,
   "paths":
     saveDirectories,
-  "casperFlags": ["--ignore-ssl-errors=true", "--ssl-protocol=any"],
-  "engine": "chromy", // alternate can be slimerjs
-    "engineOptions": {
-      chromeFlags: ["--allow-insecure-localhost"]
-    },
+  // "casperFlags": ["--ignore-ssl-errors=true", "--ssl-protocol=any"],
+  "engine": "puppeteer", // alternate can be chromy, in which case uncomment the engineOptions below
+    // "engineOptions": {
+    //   chromeFlags: ["--allow-insecure-localhost"]
+    // },
   "report": ["browser"],
+  "startingPort": 9333,
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
   "debug": false
 };
