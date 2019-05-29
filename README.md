@@ -41,7 +41,7 @@ This is for a fresh setup of BackstopJS on a project. See [BackstopJS Commands a
 * *If desired*, update the `delay` and `misMatchThreshold` values in the `scenarios.push` array
 * *If desired*, update or add viewport settings in the `module.exports`
 * In the `paths.js` file, add your relative URLs to the `pathConfig` array
-* Create a README in `<project root>/tests/backstop`, and just add a link back to the [visual regression README](https://github.com/metaltoad/visual-regression/blob/master/README.md).
+* Create a README in `<project root>/tests/backstop`, and just add a link back to the [visual regression README](https://github.com/angelariggs/visual-regression/blob/master/README.md).
     * This is to make viz reg updates simpler; instead of having a visual regression README per project, there will just be a single source of truth README in the main Visual Regression repo.
 
 # BackstopJS Commands and Use
