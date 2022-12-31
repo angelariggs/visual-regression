@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/angelariggs/visual-regression#readme",
   "dependencies": {
-    "backstopjs": "^3.2.17",
+    "backstopjs": "^3.9.13",
     "dotenv": "^5.0.1",
     "minimist": "^1.2.0"
   }
